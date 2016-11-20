@@ -11,7 +11,23 @@
 		})
 	}]);
 	
-	module.controller('Top250Controller',['$scope',function($scope){
+	module.controller('Top250Controller',['$scope','$http',function($scope,$http){
+		
+		$scope.subjects=[];
+		$scope.message='';
+		
+		$http.get('/myDemo/moviecat/datas/top250.json').then(function(res){
+			
+			if(res.status==200){
+				$scope.subjects=res.data.subjects;
+			}else{
+				$scope.message='获取数据错误,错误信息：'+res.statusText;
+			}
+			
+			
+		},function(err){
+			$scope.message='获取数据错误,错误信息：'+err.statusText;
+		})
 		
 	}]);
 
