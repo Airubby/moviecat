@@ -15,13 +15,17 @@
 	}]);
 	
 	module.controller('InTheatersController',['$scope','HttpService',function($scope,HttpService){
+		$scope.loading=true;
 		$scope.subjects=[];
 		$scope.message='';
-		
+		$scope.totalCount=0;
 		HttpService.jsonp('http://api.douban.com/v2/movie/in_theaters',{},function(data){
 			$scope.subjects=data.subjects;
-			$scope.$apply('subjects');
+			$scope.totalCount=data.total;
+			$scope.loading=false;
+			$scope.$apply();
 			//$apply()的作用就是让指定的表达式重新同步
+			
 		});
 		
 		
