@@ -1,0 +1,40 @@
+<h1 class="page-header">{{title}}</h1>
+<h2 ng-if="message">{{message}}</h2>
+<div class="list-group">
+  <a ng-repeat="item in subjects" href="#" class="list-group-item">
+  	<span class="badge">{{item.rating.average}}</span>
+    <div class="media">
+	  <div class="media-left">
+	    <img ng-src="{{item.images.small}}" alt="{{item.title}}">
+	  </div>
+	  <div class="media-body">
+	    <h2 class="media-heading">{{item.title}}</h2>
+	    <p>
+	    	类型：<span>{{item.genres.join('、 ')}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	上映年份：<span>{{item.year}}</span>
+	    </p>
+	    <p>导演：<span ng-repeat="data in item.directors">{{data.name}}<span ng-if="!$last">、 </span></span></p>
+	    <p>主演：<span ng-repeat="cast in item.casts">{{cast.name+($last?'':'、 ')}}</span></p>
+	    <!--{{cast.name}}{{$last?'':'、 '}}-->
+	  </div>
+	</div>
+  </a>
+</div>
+
+<div ng-show="!loading">
+	<p>总共{{totalCount}}条记录,&nbsp;第{{currentPage}}/{{totalPages}}页</p>
+	<nav>
+	  <ul class="pager">
+	    <li ng-class="{disabled:currentPage<=1}"><a href="javascript:;" ng-click="goPage(currentPage-1)">&laquo; Older</a></li>
+	    <li ng-class="{disabled:currentPage>=totalPages}"><a href="javascript:;" ng-click="goPage(currentPage+1)">Newer &raquo;</a></li>
+	  </ul>
+	</nav>
+</div>
+
+
+<div class="mask" ng-show="loading">
+  <div class="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+  </div>
+</div>

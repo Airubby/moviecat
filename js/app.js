@@ -3,9 +3,7 @@
 
 	angular.module('moviecat',[
 	'ngRoute',
-	'moviecat.in_theaters',
-	'moviecat.coming_soon',
-	'moviecat.top250'
+	'moviecat.public_list'
 	])
 	
 	.config(['$routeProvider',function($routeProvider){
