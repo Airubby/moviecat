@@ -108,7 +108,9 @@ body {
 .list-group .media{
 	margin-top: 0;
 }
-
+.list-group .media .media-left img{
+	height: 128px;
+}
 
 
 
