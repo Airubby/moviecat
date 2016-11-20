@@ -1,4 +1,4 @@
-<h1 class="page-header">正在热映</h1>
+<h1 class="page-header">{{title}}</h1>
 <h2 ng-if="message">{{message}}</h2>
 <div class="list-group">
   <a ng-repeat="item in subjects" href="#" class="list-group-item">
@@ -20,7 +20,16 @@
 	</div>
   </a>
 </div>
-<p>总共{{totalCount}}条记录</p>
+
+<div ng-show="!loading">
+	<p>总共{{totalCount}}条记录,&nbsp;第{{currentPage}}/{{totalPages}}页</p>
+	<nav>
+	  <ul class="pager">
+	    <li ng-class="{disabled:currentPage<=1}"><a href="javascript:;" ng-click="goPage(currentPage-1)">&laquo; Older</a></li>
+	    <li ng-class="{disabled:currentPage>=totalPages}"><a href="javascript:;" ng-click="goPage(currentPage+1)">Newer &raquo;</a></li>
+	  </ul>
+	</nav>
+</div>
 
 
 <div class="mask" ng-show="loading">
@@ -29,4 +38,3 @@
     <div class="dot2"></div>
   </div>
 </div>
-

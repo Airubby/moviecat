@@ -8,26 +8,49 @@
 	]);
 	
 	module.config(['$routeProvider',function($routeProvider){
-		$routeProvider.when('/in_theaters',{
+		$routeProvider.when('/in_theaters/:page',{
 			templateUrl:'template/in_theaters/in_theaters.html',
 			controller:'InTheatersController'
 		})
 	}]);
 	
-	module.controller('InTheatersController',['$scope','HttpService',function($scope,HttpService){
+	module.controller('InTheatersController',[
+		'$scope',
+		'$route',
+		'$routeParams',
+		'HttpService',
+		function($scope,$route,$routeParams,HttpService){
+		
+		var count=10;
+		var page=parseInt($routeParams.page);
+		var start=(page-1)*count;
+		
 		$scope.loading=true;
 		$scope.subjects=[];
 		$scope.message='';
+		$scope.title='';
 		$scope.totalCount=0;
-		HttpService.jsonp('http://api.douban.com/v2/movie/in_theaters',{},function(data){
+		$scope.totalPages=0;
+		$scope.currentPage = page;
+		
+		HttpService.jsonp('http://api.douban.com/v2/movie/in_theaters',{start:start,count:count},function(data){
+			$scope.title=data.title;
 			$scope.subjects=data.subjects;
 			$scope.totalCount=data.total;
+			$scope.totalPages=Math.ceil($scope.totalCount/count);
 			$scope.loading=false;
 			$scope.$apply();
 			//$apply()的作用就是让指定的表达式重新同步
 			
 		});
 		
+		$scope.goPage=function(page){
+			
+			if(page>=1&&page<=$scope.totalPages){
+				$route.updateParams({page:page});
+			}
+			
+		}
 		
 	}]);
 

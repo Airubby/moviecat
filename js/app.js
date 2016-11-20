@@ -10,7 +10,7 @@
 	
 	.config(['$routeProvider',function($routeProvider){
 		$routeProvider.otherwise({
-			redirectTo:'/in_theaters'
+			redirectTo:'/in_theaters/1'
 		})
 	}]);
 
