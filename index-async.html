@@ -1,14 +1,43 @@
-<!doctype html>
-<html lang="zh-CN" ng-app="moviecat">
+<!DOCTYPE html>
+<html>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
   		<meta name="viewport" content="width=device-width, initial-scale=1">
-  		<title>豆瓣电影</title>
+  		<title>豆瓣电影-异步加载</title>
 		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="css/app.css">
+		<!--load.js;script.js；head.js都可以帮助我们异步的方式加载js-->
+		<script src="node_modules/scriptjs/src/script.js" type="text/javascript" charset="utf-8"></script>
+		<!-- angular-loader的作用就是在使用一些异步加载脚本的库的时候，自动控制依赖顺序 -->
+		<script src="node_modules/angular-loader/angular-loader.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*$script('you want to load js',function(){
+				
+			});
+			$script(['you want to load js','you want to load js'],function(){
+				
+			});*/
+			
+			$script([
+		      './node_modules/angular/angular.min.js',
+		      './node_modules/angular-route/angular-route.min.js',
+		      './template/movie_list/controller_public_list.js',
+		      './js/http.js',
+		      './js/auto-focus.js',
+		      './js/app.js' // 由于这个包比较小，下载完成过后就直接执行
+		    ], function() {
+		      console.log(angular);
+		      angular.bootstrap(document, ['moviecat']);
+		      // console.log(jQuery);
+		    });
+			
+			
+			
+		</script>
 	</head>
 	<body>
+		
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	      <div class="container-fluid">
 	        <div class="navbar-header">
@@ -49,12 +78,7 @@
 	        </div>
 	      </div>
         </div>
-        <script src="node_modules/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="node_modules/angular-route/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/app.js"></script>
-		<script src="js/http.js"></script>
-		<script src="js/auto-focus.js"></script>
-		<script src="template/movie_list/controller_public_list.js"></script>
+		
 		
 	</body>
 </html>

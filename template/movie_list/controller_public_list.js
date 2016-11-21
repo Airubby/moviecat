@@ -28,19 +28,27 @@
 		$scope.loading=true;
 		$scope.subjects=[];
 		$scope.message='';
-		$scope.title='';
+		$scope.title='Loading...';
 		$scope.totalCount=0;
 		$scope.totalPages=0;
 		$scope.currentPage = page;
 		
-		HttpService.jsonp('http://api.douban.com/v2/movie/'+$routeParams.category,{start:start,count:count},function(data){
-			$scope.title=data.title;
-			$scope.subjects=data.subjects;
-			$scope.totalCount=data.total;
-			$scope.totalPages=Math.ceil($scope.totalCount/count);
-			$scope.loading=false;
-			$scope.$apply();
-			//$apply()的作用就是让指定的表达式重新同步
+		HttpService.jsonp('http://api.douban.com/v2/movie/'+$routeParams.category,
+			//$routeParams的数据来源：1.路由匹配出来的；2.？+参数
+			{
+			start:start,
+			count:count,
+			q:$routeParams.q
+			},
+			function(data){
+				
+				$scope.title=data.title;
+				$scope.subjects=data.subjects;
+				$scope.totalCount=data.total;
+				$scope.totalPages=Math.ceil($scope.totalCount/count);
+				$scope.loading=false;
+				$scope.$apply();
+				//$apply()的作用就是让指定的表达式重新同步
 			
 		});
 		

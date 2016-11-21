@@ -11,7 +11,7 @@
 		$routeProvider.otherwise({
 			redirectTo:'/in_theaters/1'
 		})
-	}]);
+	}])
 	
 	
 	/*
@@ -30,7 +30,18 @@
 			
 		});
 		
-	}]);
+	}])
 	*/
-
+	
+	.controller('SearchController',['$scope','$route',function($scope,$route){
+		$scope.input='';
+		$scope.search=function(){
+			$route.updateParams({category:'search',q:$scope.input});
+		}
+	}]);
+	
+	
+	
+	
+	
 })(angular);
