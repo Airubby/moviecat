@@ -82,5 +82,5 @@
 		
 	}]);
 */
-})(angular)
+})(angular);
 

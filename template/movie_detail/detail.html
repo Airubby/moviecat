@@ -1,0 +1,16 @@
+<h1 class="page-header" ng-show="loading">Loading...</h1>
+<div class="jumbotron" ng-hide="loading">
+  <h1>{{movie.title}}</h1>
+  <img ng-src="{{movie.images.large}}" alt="{{movie.title}}"/>
+  <p>{{movie.summary}}</p>
+  <p></p>
+</div>
+
+
+
+<div class="mask" ng-show="loading">
+  <div class="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+  </div>
+</div>

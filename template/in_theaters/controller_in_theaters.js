@@ -74,5 +74,5 @@
 		
 	}]);
 */
-})(angular)
+})(angular);
 

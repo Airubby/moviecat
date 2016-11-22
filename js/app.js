@@ -3,6 +3,7 @@
 
 	angular.module('moviecat',[
 	'ngRoute',
+	'moviecat.movie_detail',
 	'moviecat.public_list',
 	'moviecat.directives.auto_focus'
 	])

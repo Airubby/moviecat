@@ -10,13 +10,13 @@
 			var randomNum=Math.random().toString().replace('.','');
 			var callbackName='my_callback'+randomNum;
 			queryString+='callback='+callbackName;
-			var scriptElement=document.createElement('script');
+			var scriptElement=$document[0].createElement('script');
 			scriptElement.src=url+queryString;
-			window[callbackName] = function(data){
+			$window[callbackName] = function(data){
 				callback(data);
-				document.body.removeChild(scriptElement);
+				$document[0].body.removeChild(scriptElement);
 			};  
-			document.body.appendChild(scriptElement);
+			$document[0].body.appendChild(scriptElement);
 			
 		  };
 		
