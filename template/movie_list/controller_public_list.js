@@ -19,9 +19,10 @@
 		'$route',
 		'$routeParams',
 		'HttpService',
-		function($scope,$route,$routeParams,HttpService){
+		'AppConfig',
+		function($scope,$route,$routeParams,HttpService,AppConfig){
 		
-		var count=10;
+		var count=AppConfig.pageSize;
 		var page=parseInt($routeParams.page);
 		var start=(page-1)*count;
 		
@@ -33,7 +34,7 @@
 		$scope.totalPages=0;
 		$scope.currentPage = page;
 		
-		HttpService.jsonp('http://api.douban.com/v2/movie/'+$routeParams.category,
+		HttpService.jsonp(AppConfig.listApiAddress+$routeParams.category,
 			//$routeParams的数据来源：1.路由匹配出来的；2.？+参数
 			{
 			start:start,

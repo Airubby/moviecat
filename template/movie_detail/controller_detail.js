@@ -19,10 +19,11 @@
 		'$route',
 		'$routeParams',
 		'HttpService',
-		function($scope,$route,$routeParams,HttpService){
+		'AppConfig',
+		function($scope,$route,$routeParams,HttpService,AppConfig){
 			$scope.movie={};
 			var id=$routeParams.id;
-			var apiAddress='https://api.douban.com/v2/movie/subject/'+id;
+			var apiAddress=AppConfig.detailApiAddress+id;
 			$scope.loading=true;
 			HttpService.jsonp(apiAddress,{},function(data){
 				$scope.movie=data;
